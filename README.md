@@ -82,3 +82,45 @@ function expect(actual) {
 		}
 	};
 ```
+
+## Step 4
+
+To get more informative error messages and now where to debug we will implement a test function which receives the title/description of the test and a callback function. We wrap it in a try-catch block so if the expect function throw any error we got to the catch block and shows in the console the title and a the error.
+
+```javascript
+import { sum, subtract } from "./math.mjs";
+
+let result, expected;
+
+test("sum adds numbers", () => {
+	const result = sum(3, 7);
+	const expected = 10;
+	expect(result).toBe(expected);
+});
+
+test("subtract subtracts numbers", () => {
+	const result = subtract(7, 3);
+	const expected = 4;
+	expect(result).toBe(expected);
+});
+
+function expect(actual) {
+	return {
+		toBe(expected) {
+			if (actual !== expected) {
+				throw new Error(`${actual} is not equal to ${expected}`);
+			}
+		}
+	};
+}
+
+function test(title, callback) {
+	try {
+		callback();
+		console.log(`✓ ${title}`);
+	} catch (err) {
+		console.error(`✕ ${title}`);
+		console.error(err);
+	}
+}
+```
