@@ -2,7 +2,7 @@
 
 To better undestand testing frameworks this repo goes step by step implementing a simple one.
 
-It's mainly based in the Kent's (blog post)[https://kentcdodds.com/blog/but-really-what-is-a-javascript-test]
+It's mainly based in the Kent's [blog post](https://kentcdodds.com/blog/but-really-what-is-a-javascript-test)
 
 ## Step 1
 
@@ -36,3 +36,22 @@ if (result !== expected) {
 ```
 
 Now we can't break any of these functions without breaking our test.
+
+## Step 2
+
+We can use the assert module from node to test and throw errors
+
+```javascript
+import assert from "assert";
+import { sum, subtract } from "./math.mjs";
+
+let result, expected;
+
+result = sum(3, 7);
+expected = 10;
+assert.strictEqual(result, expected);
+
+result = subtract(7, 3);
+expected = 4;
+assert.strictEqual(result, expected);
+```
